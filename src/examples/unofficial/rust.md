@@ -4,14 +4,16 @@
 
 ## Installation
 
+## Usage
+
 ```toml
 [dependencies]
-nekosbest = "0.14.1"
+nekosbest = "0.15"
 ```
 
 ## Example
 
-```rust, noplaypen
+```rust ,no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let img_url: String = nekosbest::get(nekosbest::Category::Neko).await?.url;
@@ -20,9 +22,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-Or with an amount (Amount is capped at 20 by the server):
+Or with an amount(amount is capped at 20 by the server):
 
-```rust, noplaypen
+```rust ,no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let images = nekosbest::get_amount(nekosbest::Category::Neko, 20).await?.0;
@@ -34,13 +36,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 Or if you already have a `reqwest::Client` that you want to use,
 use `get_with_client` and `get_with_client_amount` respectively.
 
-## Details
-
 There is another property called `details`:
 
-For `Category::Neko`, `Category::Husbando`, `Category::Kitsune`, `Category::Waifu` (Image endpoints):
+For `Category::Neko`, `Category::Husbando`, `Category::Kitsune`, `Category::Waifu` (image endpoints):
 
-```rust, noplaypen
+```rust ,no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let details = nekosbest::get(nekosbest::Category::Neko)
@@ -55,9 +55,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-For everything else (GIF endpoints):
+For everything else(gif endpoints):
 
-```rust, noplaypen
+```rust ,no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let details = nekosbest::get(nekosbest::Category::Pat)
@@ -76,9 +76,9 @@ Or with the `strong-types` feature, bringing strong types guarantees for details
 
 Remember to add the `st_` in front of `get`, `get_amount`, `get_with_client` and `get_with_client_amount`.
 
-Neko:
+Nekos:
 
-```rust, noplaypen
+```rust ,no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let resp = nekosbest::st_get::<nekosbest::Neko>().await?;
@@ -90,9 +90,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-GIF:
+Gif:
 
-```rust, noplaypen
+```rust ,no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let details = nekosbest::st_get::<nekosbest::Pat>().await?.details;
@@ -103,7 +103,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 By using the `local` feature, you can completely skip requests to the API.
 
-```rust, noplaypen
+```rust ,no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let img_url = nekosbest::local::Neko.get(); // requires the "local" feature
@@ -114,9 +114,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 Or if you have your own random number:
 
-```rust, noplaypen
+```rust ,no_run
 fn main() {
-    let your_random = unimplemented!();
+    let your_random = todo!();
     let img_url = nekosbest::local::Neko.get_random(your_random);
     println!("{}", img_url);
     Ok(())
