@@ -1,0 +1,31 @@
+name: Patch Rust Docs
+
+on:
+  push:
+    branches:
+      - rs-docs
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install requests
+        run: pip install requests
+
+      - name: "Patch rust"
+        run: |
+          python patch_rs.py
+        env:
+          RS_FILE_PATH: "src/examples/unofficial/rust.md"
+          RS_FILE_OUT_PATH: "src/examples/unofficial/rust.md"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "Update rust docs"
+          committer: Dinu Blanovschi <git@dnbln.dev>
+          title: "Update rust docs"
+          branch: rs-docs-patched
+          base: main-test
+          add-paths: src/examples/unofficial/rust.md
