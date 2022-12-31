@@ -32,6 +32,7 @@ jobs:
           git branch -M rs-docs-patched
           git reset --hard origin/upstream-main
           cp new_rust.md src/examples/unofficial/rust.md
+          git add src/examples/unofficial/rust.md
           git commit -m "Update rust docs"
           git push -f origin rs-docs-patched
 
