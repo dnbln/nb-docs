@@ -40,4 +40,4 @@ jobs:
         run: |
           gh pr create --title "Update rust docs" --body "Update rust docs" --base main --head rs-docs-patched -R nekos-best/docs
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
