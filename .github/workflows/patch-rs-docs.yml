@@ -17,6 +17,7 @@ jobs:
         run: |
           python patch_rs.py
         env:
+          RS_COMMIT_SHA_FILE: "src/examples/unofficial/rust-commit.txt"
           RS_FILE_PATH: "src/examples/unofficial/rust.md"
           RS_FILE_OUT_PATH: "src/examples/unofficial/rust.md"
 

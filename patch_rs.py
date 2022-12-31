@@ -1,5 +1,4 @@
 import os
-import re
 import requests
 
 
@@ -12,20 +11,21 @@ def patch_line(line: str) -> str:
 def main():
     path = os.getenv('RS_FILE_PATH')
     out_path = os.getenv('RS_FILE_OUT_PATH', path)
+    commit_sha_file = os.getenv('RS_COMMIT_SHA_FILE')
     with open(path, 'r') as f:
         contents = f.read()
+
+    with open(commit_sha_file, 'r') as f:
+        commit_sha = f.read().strip()
 
     lines = contents.splitlines()
     new_lines = []
 
     for line in lines:
-        regex = re.compile(r'^\$\$DOC_BLOCK:([0-9a-f]+)\$\$$')
-        match = regex.match(line)
-        if not match:
+        if line != "$$DOC_BLOCK$$":
             new_lines.append(line)
             continue
-        ref = match.group(1)
-        url = f'https://github.com/dnbln/nb-rs/blob/{ref}/README.md?raw=true'
+        url = f'https://github.com/dnbln/nb-rs/blob/{commit_sha}/README.md?raw=true'
         response_text = requests.get(url).text
         add_lines = False
         for response_line in response_text.splitlines():
