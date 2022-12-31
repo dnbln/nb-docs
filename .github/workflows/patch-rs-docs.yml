@@ -32,7 +32,7 @@ jobs:
           git fetch origin
           git diff 'HEAD^1' 'HEAD' > patch.diff
           git branch -M rs-docs-patched
-          git reset --hard upstream-main
+          git reset --hard origin/upstream-main
           git apply patch.diff
           git commit -m "Update rust docs"
           git push -f origin rs-docs-patched
