@@ -24,16 +24,14 @@ jobs:
         run: |
           git config --local user.name "Dinu Blanovschi"
           git config --local user.email "git@dnbln.dev"
-          git add src/examples/unofficial/rust.md
-          git commit -m "Commit changes"
 
       - name: "Push changes"
         run: |
+          cp src/examples/unofficial/rust.md new_rust.md 
           git fetch origin
-          git diff 'HEAD^1' 'HEAD' > patch.diff
           git branch -M rs-docs-patched
           git reset --hard origin/upstream-main
-          git apply patch.diff
+          cp new_rust.md src/examples/unofficial/rust.md
           git commit -m "Update rust docs"
           git push -f origin rs-docs-patched
 
