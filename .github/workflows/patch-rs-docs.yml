@@ -28,9 +28,10 @@ jobs:
       - name: "Push changes"
         run: |
           cp src/examples/unofficial/rust.md new_rust.md 
-          git fetch origin
+          git remote add upstream https://github.com/nekos-best/docs
+          git fetch upstream
           git branch -M rs-docs-patched
-          git reset --hard origin/upstream-main
+          git reset --hard upstream/main
           cp new_rust.md src/examples/unofficial/rust.md
           git add src/examples/unofficial/rust.md
           git commit -m "Update rust docs"

@@ -3,6 +3,12 @@ import re
 import requests
 
 
+def patch_line(line: str) -> str:
+    if line.startswith("```rs") or line.startswith("```rust"):
+        return "```rust, noplaypen"
+    return line
+
+
 def main():
     path = os.getenv('RS_FILE_PATH')
     out_path = os.getenv('RS_FILE_OUT_PATH', path)
@@ -24,11 +30,11 @@ def main():
         add_lines = False
         for response_line in response_text.splitlines():
             if add_lines:
-                new_lines.append(response_line)
+                new_lines.append(patch_line(response_line))
             else:
                 if response_line == '## Usage':
                     add_lines = True
-                    new_lines.append(response_line)
+                    new_lines.append(patch_line(response_line))
 
     with open(out_path, 'w') as f:
         f.write('\n'.join(new_lines))
