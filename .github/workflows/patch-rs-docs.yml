@@ -37,6 +37,6 @@ jobs:
 
       - name: "Create Pull Request"
         run: |
-          gh pr create --title "Update rust docs" --body "Update rust docs" --base main -R nekos-best/docs --no-maintainer-edit
+          gh pr create --title "Update rust docs" --body "Update rust docs" --base main -R nekos-best/docs --no-maintainer-edit --head
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
