@@ -7,7 +7,7 @@ $$DOC_BLOCK$$
 
 ## About
 
-> Example added by: [**Dinu Blanovschi**](https://github.com/dnbln)
+> Example added by: [**dnbln**](https://github.com/dnbln)
 >
 > The source code is available at [**GitHub**](https://github.com/dnbln/nb-rs)
 >
